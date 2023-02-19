@@ -1,0 +1,179 @@
+\section{Conhecimentos mais avançados}
+    \subsection{Inserção de código Python e MATLAB}
+        É comum nas engenharias o ensino de Python, e para aquelas que lidam com sinais e sistemas,
+        como elétrica e mecatrônica, o uso do Matlab.
+        Um código pode ser inserido no texto através do ambiente {\tt lstlisting} fornecido pelo pacote {\tt listings};
+        por exemplo, o código 
+        \begin{verbatim}
+        \begin{lstlisting}[language=Python]
+        print('Hello World!')
+        \end{lstlisting}
+        \end{verbatim}
+
+        gera
+        \begin{lstlisting}[language=Python]
+        print('Hello World!')
+        \end{lstlisting}
+
+        ao passo que 
+        \begin{verbatim}
+        \lstset{mystyle}
+        \begin{lstlisting}[language=Matlab]
+        clc; hold on; grid on;
+        for a = 0:10
+            G = tf(1, [1 a]);
+            bode(G);
+        end
+        'done!'
+        \end{lstlisting}
+        \end{verbatim}
+
+        gera
+        \begin{lstlisting}[language=Matlab]
+        clc; hold on; grid on;
+        for a = 0:10
+            G = tf(1, [1 a]);   % malha aberta com pólo em -a
+            bode(G);
+        end
+        'done!'
+        \end{lstlisting}
+
+        Para trecchos maiores de código, recomenda-se usar o comando \verb|\lstinputlisting{}|, 
+        que inclui um código no texto de maneira automática.
+        Neste modelo, o comando espera que os programas estejam na pasta {\tt listings}.
+        Por exemplo, o código
+        \begin{verbatim}
+        \lstinputlisting[
+            language=Python, label={lst:código longo},
+            caption={
+                Código Python de maior tamanho.
+            }]{exemplo.py}
+        \end{verbatim}
+
+        resulta no \autoref{lst:código longo}.
+        \lstinputlisting[
+            language=Python, label={lst:código longo},
+            caption={
+                Código Python de maior tamanho.
+            }]{exemplo.py}
+
+        Note que as palavras chave de cada linguagem ficam destacadas, facilitando a leitura.
+        Caso queira mudar as cores, modifique o {\tt setup\_listings.tex} na {\tt main}.
+        Para se aprofundar no uso do pacote {\tt listings}, veja 
+        \href{https://www.overleaf.com/learn/latex/Code_listing}{este site} ou 
+        \href{http://users.ece.utexas.edu/~garg/dist/listings.pdf}{a própria documentação}.
+
+
+    \subsection{Hyperlinks e URLs}
+        URLs clicáveis e hyperlinks podem ser inseridos no relatório através dos comandos
+        \verb|\url{}| e \verb|\href{}| disponibilizados no pacote {\tt hyperref}.
+        Recomenda-se que esse pacote seja o último a ser incluído para evitar conflitos com outros pacotes que mexem com citações,
+        e também permite a customização das cores dos links, entre outros.
+
+        Confira um exemplo de uso de cada comando abaixo.
+        Para mais detalhes, vide 
+        \href{https://www.overleaf.com/learn/latex/Hyperlinks}{este site} ou 
+        \href{https://linorg.usp.br/CTAN/macros/latex/contrib/hyperref/doc/hyperref-doc.pdf}{a própria documentação}.
+        \begin{itemize}
+            \item 
+            ``\verb|O site \url{https://latexcolor.com} é ótimo|'' $\to$
+            ``O site \url{https://latexcolor.com} é ótimo''
+
+            \item 
+            ``\verb|Acesse documentações dos pacotes \href{https://ctan.org}{aqui}.|'' $\to$
+            ``Acesse documentações dos pacotes \href{https://ctan.org}{aqui}.''
+        \end{itemize}
+    
+    \subsection{Criação de tabela}
+        Inserir uma tabela em \LaTeX~pode vir a ser relativamente complicado.
+        Se a tabela não possui células que abrangem mais de uma coluna ou linha por vez,
+        o código fica relativamente simples: 
+        basta usar o ambiente {\tt tabular} dentro do ambiente {\tt table}, e usar os separadores de coluna e linha
+        \verb|&| e \verb|\\| para preencher a tabela em si.
+        Por exemplo, o código
+        \begin{verbatim}
+        \begin{table}[H]\centering
+            \begin{tabular}{c | c c}
+                \toprule
+                $t_\text{exec}$ ($\mu$s)    & $C$       & $f$ (MHz) \\
+                \midrule
+                \midrule
+                $0$                         & $0$       & $50$      \\
+                $50$                        & $2500$    & $50$      \\
+                $100$                       & $5000$    & $50$      \\
+                \bottomrule
+            \end{tabular}
+            \caption{Tabela simples.}
+            \label{tab:simples}
+        \end{table}
+        \end{verbatim}
+
+        gera a \autoref{tab:simples}.
+        \begin{table}[H]\centering
+            \begin{tabular}{c | c c}
+                \toprule
+                $t_\text{exec}$ ($\mu$s)    & $C$       & $f$ (MHz) \\
+                \midrule
+                \midrule
+                $0$                         & $0$       & $50$      \\
+                $50$                        & $2500$    & $50$      \\
+                $100$                       & $5000$    & $50$      \\
+                \bottomrule
+            \end{tabular}
+            \caption{Tabela simples.}
+            \label{tab:simples}
+        \end{table}
+
+        Como no caso de inserir uma figura, o {\tt H} serve para posicionar a tabela precisamente.
+        Os argumentos {\tt c} e {\tt |} do tabular centraliza uma coluna e cria uma linha vertical entre colunas, respectivamente.
+        A quantidade de {\tt c}'s estabelece a quantidade de colunas da tabela.
+        Os comandos \verb|\toprule|, \verb|\midrule| e \verb|\bottomrule| vêm do pacote {\tt booktabs}
+        e dão bom aspecto à tabela.
+
+        Criar células que abrangem múltiplas colunas ou linhas geram uma tabela mais complicada.
+        Nesse caso, pode-se lançar mão dos comandos \verb|\multirow{}{}{}| e \verb|\multicolumn{}{}{}|,
+        que recebem a quantidade de colunas/linhas a serem mescladas, 
+        o tipo de centralização da célula resultante,
+        e o valor da célula resultante.
+        Por exemplo, o código
+        \begin{verbatim}
+        \begin{table}[H]\centering
+            \begin{tabular}{c c c}
+                \toprule
+                \multirow{2}{*}{$n$} & \multicolumn{2}{c}{$I_1$} \\
+                \cmidrule{2-3}
+                    & teórico & real   \\\midrule\midrule
+                 40 &  14256  & 14256  \\
+                 50 &  22316  & 22316  \\
+                 60 &  32176  & 32176  \\
+                 70 &  43836  & 43836  \\
+                 80 &  57296  & 57296  \\
+                 90 &  72556  & 72556  \\
+                100 &  89616  & 89616  \\\bottomrule
+            \end{tabular}
+        \end{table}
+        \end{verbatim}
+
+        gera a tabela
+        \begin{table}[H]\centering
+            \begin{tabular}{c c c}
+                \toprule
+                \multirow{2}{*}{$n$} & \multicolumn{2}{c}{$I_1$} \\
+                \cmidrule{2-3}
+                    & teórico & real   \\\midrule\midrule
+                 40 &  14256  & 14256  \\
+                 50 &  22316  & 22316  \\
+                 60 &  32176  & 32176  \\
+                 70 &  43836  & 43836  \\
+                 80 &  57296  & 57296  \\
+                 90 &  72556  & 72556  \\
+                100 &  89616  & 89616  \\\bottomrule
+            \end{tabular}
+        \end{table}
+
+        Note ainda o uso do comando \verb|\cmidrule{}|, uma versão mais abrangente do \verb|\midrule|;
+        recebe como argumento o números das colunas pelas quais a linha horizontal deve passar.
+        No exemplo, ela atravessa a segunda e terceira coluna, evitando o $n$.
+        Para entender melhor a criação de tabelas e/ou os comandos do {\tt booktab}, visite
+        \href{https://www.overleaf.com/learn/latex/Tables}{o Overleaf} ou a 
+        \href{https://linorg.usp.br/CTAN/macros/latex/contrib/booktabs/booktabs.pdf}{documentação do pacote}.

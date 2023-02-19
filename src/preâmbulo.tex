@@ -1,0 +1,75 @@
+\usepackage[T1]{fontenc}    % suporte para letras com acento e hifenização 
+                            % (https://tex.stackexchange.com/questions/664/why-should-i-use-usepackaget1fontenc)
+                            
+% definição da cor tema (mais cores em latexcolor.com)
+\usepackage{tikz}
+    \definecolor{themecolor}{rgb}{1.0, 0.65, 0.0}
+    
+\usepackage[margin=2.5cm]{geometry} % margem do texto uniforme e igual a 2.5cm
+\usepackage[brazil]{babel}          % troca 'Summary' por 'Sumário', 'Figure' por 'Figura', 'Table' por 'Tabela', etc.
+\usepackage{charter}                % coloca a fonte do relatório como charter
+\usepackage{helvet}                 % estiliza a fonte sans serif 
+                                    % (https://linorg.usp.br/CTAN/macros/latex/required/psnfss/psnfss2e.pdf)
+\usepackage{multirow}               % fornece o comando \multirow{}{}{} para mesclar células numa mesma linha da tabela
+\usepackage{booktabs}               % disponibiliza comandos que deixam a tabela mais bonita 
+                                    % (https://linorg.usp.br/CTAN/macros/latex/contrib/booktabs/booktabs.pdf) 
+\usepackage{graphicx, float}        % pacotes para inserção de figuras
+    \graphicspath{{figures/}}       % pasta figures se torna o lugar de procura padrão do \includegraphics
+\usepackage{amsmath}                % pacote básico para suporte a equações e matemática em geral 
+                                    % (https://linorg.usp.br/CTAN/macros/latex/required/amsmath/amsldoc.pdf)
+\input{setup_listings.tex}          % formatação de códigos python e matlab
+                                    % (http://users.ece.utexas.edu/~garg/dist/listings.pdf)
+
+% estiliza texto das legendas
+\usepackage{caption, subcaption}
+    \captionsetup{
+        labelfont={sf, bf},         % 'Figura X:' em negrito e sans serif
+        format={hang},              % quebra de linha no texto da legenda é identado
+        textfont=it                 % texto da legenda em itálico
+    }
+
+% estilização dos títulos das seções, subseções, e subsubseções
+\usepackage{titlesec} 
+    \titleformat*{\section}{\large\bfseries\sffamily}   % fonte grande, negrito, sans serif
+    \titleformat*{\subsection}{\bfseries\sffamily}      % negrito, sans serif
+    \titleformat*{\subsubsection}{\sffamily}            % sans serif
+
+% escreve informações que devem aparecer no topo e base da página
+\usepackage{fancyhdr, lastpage}
+    \setlength{\headheight}{15pt}                       % espaçamento de segurança entre o cabeçalho e o texto
+    \fancyhead{}
+    \fancyhead[r]{Código do curso -- Prof. Dr. Nome do professor}
+    \fancyhead[l]{\rightmark}                           % subseção atual
+    
+    \fancyfoot{} 
+    \fancyfoot[r]{\thepage \ de \pageref*{LastPage}}    % página X de Y
+    \fancyfoot[l]{\leftmark}                            % seção atual
+    
+    \renewcommand{\headrulewidth}{0.00mm}               % sem linha no topo da página (tire do 0 para criá-la)
+    \renewcommand{\footrulewidth}{0.25mm}               % com linha no fundo da página (ponha em 0 para tirá-la)
+    \pagestyle{fancy}                                   % moldura acima = padrão do documento (exceto página do título)
+
+% coloração dos links
+\usepackage{hyperref}
+    \hypersetup{
+        colorlinks,
+        linkcolor   = themecolor!80!black,  % mistura a cor tema com um pouco de preto
+        urlcolor    = themecolor!80!black
+    }
+
+
+% comando para a criação da figura no título
+\newcommand{\cover}[1]{ 
+    \begin{center}
+        \includegraphics[width=5cm]{#1}
+    \end{center}
+}
+
+% comando para destacar texto (caixa colorida)
+\newcommand{\highlightbox}[1]{\noindent
+    \colorbox{themecolor!25}{
+        \begin{minipage}{\linewidth}
+            #1
+        \end{minipage}
+    }
+}

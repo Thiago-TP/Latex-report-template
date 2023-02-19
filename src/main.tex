@@ -1,0 +1,49 @@
+\documentclass[a4paper, 11pt]{article}  % especificação do documento com opções padrão
+  \input{preâmbulo.tex}                 % aciona o código que prepara todo o documento
+
+  % título, autores e data
+  \title{\textbf{\sffamily     % deixa em negrito + sans serif
+        Turma X, Grupo XX\\
+        Relatório do trabalho de XX:\\
+        Nome do trabalho
+    }
+  }
+  \author{
+    Autor 1
+    \thanks{Matrícula 1 -- email 1}     % se desnecessário tire os \thanks
+    \and
+    Autor 2 
+    \thanks{Matrícula 2 -- email 2}
+    \and
+    Autor 3 
+    \thanks{Matrícula 3 -- email 3}
+    % \and
+    % Autor 4 
+    % \thanks{Matrícula 4 -- email 4}   % caso hajam mais autores, simplesmente repita o \and
+  }
+  \date{
+    Universidade de Brasília, XX de YY de 20ZZ
+  }
+
+% início do pdf  
+\begin{document}
+    \maketitle  % imprime título, autores, data
+    \abstract{  % resumo
+        O \LaTeX~é uma poderosa ferramenta de formatação de texto voltada para artigos acadêmicos.
+        Embora demore a ser dominada, a excelente apresentação providenciada pela ferramenta é uma vantagem que deve ser considerada.
+        Este repositório procura suprir a necessidade do usuário por um \textit{template} bem feito de relatório em \LaTeX~sem, entretanto, exigir conhecimentos profundos da ferramenta.
+        Ao longo deste texto a estrutura do repositório, assim como as funcionalidades específicas deste projeto, são explicadas. 
+        Abaixo mostra-se uma bela imagem opcional de capa.
+    }\\
+    
+    \cover{capa}                        % imagem de capa (retire o comando se desnecessário)
+    \tableofcontents                    % imprime sumário
+    \thispagestyle{empty}               % tira o número da página
+
+    \clearpage                          % nova página
+    
+    \input{sections/introdução.tex}     % introdução
+    \input{sections/básico.tex}         % seção postiça 1
+    \input{sections/avançado.tex}       % seção postiça 2  
+    \input{sections/bibliografia.tex}   % bibliografia
+\end{document}

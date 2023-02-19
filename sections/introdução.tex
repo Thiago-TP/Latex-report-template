@@ -1,0 +1,24 @@
+\section{Introdução}
+    Para organizar o seu relatório em \LaTeX, recomenda-se usar a organização utilizada neste repositório:
+    \begin{itemize}
+        \item uma pasta {\tt figures} com todas as figuras, gráficos e etc. do trabalho;
+        \item uma pasta {\tt listings} com todas os códigos a serem incluídos no relatório;
+        \item uma pasta {\tt sections} com todas as seções do relatório (arquivos {\tt.tex});
+        \item uma pasta {\tt src} com os arquivos {\tt.tex} que preparam e estruturam o relatório.
+    \end{itemize}
+
+    Dependendo do tamanho do documento, pode vir a ser confortável criar uma 5\textordfeminine~pasta que contenha subseções, a {\tt subsections}.
+    Por outro lado, caso o documento seja livro ao invés de artigo, o diretório {\tt sections} pode ser substituído por {\tt chapters}, ou {\tt parts}. 
+
+    A pasta {\tt src} confina a {\tt main.tex}, {\tt preâmbulo.tex} e o {\tt setup\_listings.tex}.
+    É na {\tt main} que o tamanho da fonte, título, autores e data são definidos, assim como as seções são incluídas; 
+    este é o único arquivo que deve ser compilado, gerando o {\tt.pdf} do relatório.
+    A compilação deve ocorrer via pdfLaTeX. Caso esteja no Overleaf, o compilador do projeto é exposto no Menu $\to$ Settings $\to$ Compiler.
+    
+    No {\tt preâmbulo.tex}, importa-se as pacotes do \LaTeX~necessárias para formatar o {\tt.pdf} em si, como a fonte do texto, cor tema do relatório, estilização das legendas, e moldura da página (essa que mostra o nome do professor, número da página, código da disciplina e etc.).
+    Certifique-se de possuir esses pacotes instalados antes de compilar a {\tt main}.
+
+    O {\tt setup\_listings.tex} formata a exibição de códigos em Python e MATLAB de maneira minuciosa.\\
+
+    Ao todo, não deve ser do interesse do leitor alterar os setups e o preâmbulo além do necessário para mudar a cor tema, moldura ou formatação dos códigos, mas sim escrever nos {\tt.tex} da {\tt sections}.
+    Caso encontre alguma dúvida ou problema, contate o autor do template pelo próprio Github em X ou mande mensagem para {\tt thiagotomasdepaula@gmail.com}.

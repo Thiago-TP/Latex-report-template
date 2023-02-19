@@ -1,0 +1,196 @@
+\section{Básico do \LaTeX}
+\label{sec:básico}
+    Apresentada a estrutura do projeto, passa-se a apresentar maneiras de escrever o {\tt.pdf} em si.
+    Não serão detalhados os documentos de preâmbulo e setups visto o texto ficaria longo demais e os códigos estão bem comentados.
+    No que segue, espera-se que o leitor veja o {\tt.pdf} e o código {\tt.tex} da seção correspondente em paralelo.
+
+    \subsection{Citações automáticas}
+    \label{sec:citações}
+        O \LaTeX tem a extremamente útil capacidade de tornar automática a citação a figuras, equações matemáticas, tabelas, seções (e afins), e, é claro, referências bibliográficas, entre outros.
+        Para tanto, simplesmente coloque o comando \verb|\label{}| dentro do ambiente ({\tt figure}, {\tt table}, {\tt equation}, etc.) ou logo abaixo do comando (\verb|\section|, etc.) cuja referência é necessária, e faça a citação através do comando \verb|\ref{}| ou \verb|\autoref{}|.
+        Em particular, equações também podem ser referidas por \verb|\eqref{}|
+
+        Por exemplo, foi colocado \verb|\label{sec:citações}| nesta subseção, 
+        de forma que escrever \verb|\ref{sec:citações}| retorna o número \ref{sec:citações},
+        enquanto que escrever \verb|\autoref{sec:citações}| retorna \autoref{sec:citações}.
+        Confira alguns exemplos a seguir.
+        \begin{itemize}
+            \item ``\verb|A seção \ref{sec:básico}|'' $\to$ ``A seção \ref{sec:básico}''.
+            \item ``\verb|A \autoref{sec:básico}|'' $\to$ ``A \autoref{sec:básico}''.
+            \item ``\verb|A equação \ref{eq:seno}|'' $\to$ ``A equação \ref{eq:seno}''.
+            \item ``\verb|A \autoref{eq:seno}|'' $\to$ ``A \autoref{eq:seno}''.
+            \item ``\verb|A equação \eqref{eq:seno}|'' $\to$ ``A equação \eqref{eq:seno}''.
+            \item ``\verb|A figura \ref{fig:exemplo}|'' $\to$ ``A figura \ref{fig:exemplo}''.
+            \item ``\verb|A \autoref{fig:exemplo}|'' $\to$ ``A \autoref{fig:exemplo}''.
+            \item ``\verb|A figura \ref{subfig:exemplo}|'' $\to$ ``A figura \ref{subfig:exemplo}''.
+            \item ``\verb|A \autoref{subfig:exemplo}|'' $\to$ ``A \autoref{subfig:exemplo}''.
+        \end{itemize}
+
+        Por outro lado, referências bibliográficas são definidas e listadas na seção Referências, que não aparece no sumário.
+        Para criar uma ficha de referências, escreva \verb|\bibitem{}| dentro do ambiente \verb|thebibliography|.
+        O argumento do \verb|\bibitem{}| é um apelido da referência respectiva, e a referência em si (título, tipo, autores, etc.) deve ser explicitada abaixo desse comando.
+
+        O código abaixo gera a bibliografia deste modelo. Note que este é um método manual, que pode vir a ser inconveniente para projetos com várias referências, mas em geral relatórios da graduação tendem a ter poucas fontes.
+        O {\tt 5} é o número máximo de referências esperado, e é usado pelo \LaTeX~para garantir que a lista fique alinhada. 
+        Confira mais informações de como fazer uma bibliografia 
+        \href{https://www.overleaf.com/learn/latex/Bibliography_management_with_bibtex}{aqui}.
+
+        \begin{verbatim}
+\begin{thebibliography}{5}
+    \bibitem{tipler} 
+        Paul A. Tipler e Gene Mosca.
+        \textit{Física Volume 2, 5\textordfeminine Edição}. 
+        LTC--Livros Técnicos e Científicos Editora S.A., Rio de Janeiro, 2006. 
+    
+    \bibitem{taylor}
+        John R. Taylor. 
+        \textit{An Introduction to Error Analysis, Second Edition}. 
+        University Science Books, Sausalito (CA), 1997. 
+
+    \bibitem{britannica}
+        Britannica, The Editors of Encyclopaedia. 
+        "servomechanism".
+        Encyclopedia Britannica, 14 May. 2013, 
+        \url{https://www.britannica.com/technology/servomechanism}. 
+        Acessado 15 de janeiro de 2023.
+\end{thebibliography}
+        \end{verbatim}
+
+        Note o comando \verb|\url{}| na última referência: é uma forma de inserir url's clicáveis no \LaTeX.
+        Esse tipo de referência, assim como hyperlinks, serão vistos mais à frente.
+    
+    \subsection{Inserção de equações}
+        Uma das grandes vantagens do \LaTeX~é a facilidade em se inserir equações assim como a qualidade da formatação do texto matemático.
+        Para colocar uma equação numerada, use o ambiente {\tt equation}. Para uma não numerada, use {\tt equation*} ou \verb|$$|.
+
+        Por exemplo, o código
+        \begin{verbatim}
+        \begin{equation}
+            \sin(z) = 
+            z 
+            - \frac{z^3}{3!} 
+            + \frac{z^5}{5!}
+            - \dots
+            = 
+            \sum_{n=0}^\infty \frac{z^{2n+1}}{(2n+1)!}
+            \label{eq:seno}
+        \end{equation}
+        \end{verbatim}
+
+        gera a \autoref{eq:seno},
+        \begin{equation}
+            \sin(z) = 
+            z 
+            - \frac{z^3}{3!} 
+            + \frac{z^5}{5!}
+            - \dots
+            = 
+            \sum_{n=0}^\infty \frac{z^{2n+1}}{(2n+1)!}
+            \label{eq:seno}
+        \end{equation}
+
+        enquanto que o código 
+        \begin{verbatim}
+        $$ 
+            \Gamma(z) =
+            \int_0^\infty t^{z-1} e^{-t} \ dt
+            =
+            (z-1)!
+        $$
+        \end{verbatim}
+
+        gera a equação abaixo.
+        $$ 
+            \Gamma(z) =
+            \int_0^\infty t^{z-1} e^{-t} \ dt
+            =
+            (z-1)!
+        $$
+
+        Para colocar expressões matemáticas na linha do texto, use \verb|$|. 
+        Mais detalhes \href{https://www.overleaf.com/learn/latex/Mathematical_expressions}{aqui}.
+
+    \subsection{Negrito, itálico e sublinhado}
+        Para deixar em itálico, negritar, ou sublinhar um texto, use os comandos
+        \verb|\textit{}|, \verb|\textbf{}| e \verb|\underline{}|, respectivamente. 
+        O {\tt preâmbulo.tex} fornece ainda o comando \verb|\highlightbox{}| para destacar blocos de texto como, por exemplo, citações longas.
+        Confira um exemplo de uso de cada comando a  seguir.\\
+
+        \highlightbox{\textit{
+                ``...l'\textbf{amour} est cent fois meilleur que la \underline{haine}. 
+                L'\textbf{espoir} est meilleur que la \underline{peur}.
+                L'\textbf{optimisme} est meilleur que le \underline{désespoir}.''
+            }
+        }
+
+        Para mais detalhes, procure
+        \href{https://www.overleaf.com/learn/latex/Bold%2C_italics_and_underlining#Underlined_text}{aqui}.
+        Por fim, repare que as aspas da citação foram feitas com acento agudo e apóstrofe, que é a forma padrrão do \LaTeX~para criá-las.
+
+    \subsection{Atalhos de espaçamento vertical e quebra de linha}
+        Um parágrafo novo pode ser iniciado deixando uma linha em branco entre dois blocos de texto.
+        Para iniciar nova linha sem criar um parágrafo, use \verb|\\| ao final da linha.
+        Por exemplo, colocar \verb|\\| aqui\\
+        gera linha aqui.
+        Usar o \verb|\\| além da linha em branco entre os blocos de texto gera tanto um parágrafo quanto um pequeno espaçamento vertical.
+        
+        Por exemplo, este é um primeiro parágrafo,\\
+
+        E este é um segundo parágrafo com \verb|\\| e linha em branco.
+
+    \subsection{Inserção de figuras}
+        Para inserir uma figura no relatório use o comando \verb|\includegraphics{}| dentro do ambiente {\tt figure}.
+        Tenha em mente que o arquivo da imagem deve estar em {\tt figures}.
+        Por exemplo, o código
+        \begin{verbatim}
+        \begin{figure}[H]\centering
+            \includegraphics[width=10cm]{gráfico do teste.pdf}
+            \caption{Figura de teste.}
+            \label{fig:exemplo}
+        \end{figure}
+        \end{verbatim}
+
+        cria a imagem abaixo. O H serve para posicionar a figura no lugar mais próximo possível do esperado.
+        \begin{figure}[H]\centering
+            \includegraphics[width=10cm]{gráfico do teste.pdf}
+            \caption{Figura de teste.}
+            \label{fig:exemplo}
+        \end{figure}
+
+        Para incluir múltiplas figuras, use o ambiente {\tt subfigure} dentro do {\tt figure}.
+        Por exemplo, o código
+        \begin{verbatim}
+        \begin{figure}[H]\centering
+            \begin{subfigure}{.45\textwidth}\centering
+                \includegraphics[width=3cm]{unb_logo.png}                
+                \caption{Figura 1.}
+                \label{subfig:exemplo}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}{.45\textwidth}\centering
+                \includegraphics[width=3cm]{unb_logo.png}                
+                \caption{Figura 2.}
+            \end{subfigure}
+            \caption{Figura dupla.}
+        \end{figure}
+        \end{verbatim}
+
+        gera a figura dupla baixo.
+        \begin{figure}[H]\centering
+            \begin{subfigure}{.45\textwidth}\centering
+                \includegraphics[width=3cm]{unb_logo.png}                
+                \caption{Figura 1.}
+                \label{subfig:exemplo}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}{.45\textwidth}\centering
+                \includegraphics[width=3cm]{unb_logo.png}                
+                \caption{Figura 2.}
+            \end{subfigure}
+            \caption{Figura dupla.}
+        \end{figure}
+
+        Note que o \verb|.45\textwidth| garante que as figuras podem ficar lado a lado com alguma folga. 
+        No caso de 3 figuras lado a lado, a largura de cada uma não deve passar de \verb|.33\textwidth|.
+        Por fim, veja mais detalhes sobre inserção de figuras 
+        \href{https://www.overleaf.com/learn/latex/Inserting_Images}{aqui}.
